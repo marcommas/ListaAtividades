@@ -23,7 +23,7 @@ app.run(function($ionicPlatform) {
   });
 });
 
-app.controller('mainController', function ($scope, $ionicPopup){
+app.controller('mainController', function ($scope, $ionicPopup, $ionicListDelegate){
     var ListaAtividades = new getListaAtividades();
 
     $scope.lista = ListaAtividades.items;
@@ -31,9 +31,9 @@ app.controller('mainController', function ($scope, $ionicPopup){
     $scope.removeStatus = false;
 
 
-    function getItem(item){
+    function getItem(item, novo){
       $scope.data = {};
-      $scope.data.newListaAtividades = "";
+      $scope.data.newListaAtividades = item.nome;
 
 
       $ionicPopup.show({
@@ -44,11 +44,16 @@ app.controller('mainController', function ($scope, $ionicPopup){
           {text: "Ok",
           onTap: function(e){
             item.nome = $scope.data.newListaAtividades;
-            ListaAtividades.adicionar(item);
+            if (novo) {
+              ListaAtividades.adicionar(item);
+            }
+
           }},
           {text: "Cancelar"}
         ]
       });
+
+      $ionicListDelegate.closeOptionButtons();
     };
 
 
@@ -61,8 +66,12 @@ app.controller('mainController', function ($scope, $ionicPopup){
     };
 
     $scope.onAdicionaItem = function(){
-      var item  = {nome:"teste", finalizada:false};
-      getItem(item);
+      var item  = {nome:"", finalizada: false};
+      getItem(item, true);
+    };
+
+    $scope.onEditaItem = function(item){
+      getItem(item, false);
     };
 
     $scope.onRemoveItem = function(item){

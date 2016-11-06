@@ -75,7 +75,7 @@
                 {{item.nome}}
 
                 <ion-delete-button class="ion-minus-circled" ng-click="onRemoveItem(item)"></ion-delete-button>
-
+                <ion-option-button class="button-positive" ng-click="onEditaItem(item)">Editar</ion-option-button> 
               </div>
               <div class="col col-10">
                 <button class="button button-small button-positive button-outline" ng-click="onMarcaItem(item)"><i class="icon icon-checkmark" ng-show="item.finalizada"></i></button>
