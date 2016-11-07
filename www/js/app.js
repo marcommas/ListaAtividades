@@ -47,7 +47,7 @@ app.controller('mainController', function ($scope, $ionicPopup, $ionicListDelega
             if (novo) {
               ListaAtividades.adicionar(item);
             }
-
+            ListaAtividades.save();
           }},
           {text: "Cancelar"}
         ]
@@ -59,6 +59,7 @@ app.controller('mainController', function ($scope, $ionicPopup, $ionicListDelega
 
     $scope.onMarcaItem = function(item){
       item.finalizada = !item.finalizada;
+      ListaAtividades.save();
     };
 
     $scope.onEscondeItem = function(item){
@@ -68,6 +69,8 @@ app.controller('mainController', function ($scope, $ionicPopup, $ionicListDelega
     $scope.onAdicionaItem = function(){
       var item  = {nome:"", finalizada: false};
       getItem(item, true);
+
+
     };
 
     $scope.onEditaItem = function(item){
@@ -76,6 +79,7 @@ app.controller('mainController', function ($scope, $ionicPopup, $ionicListDelega
 
     $scope.onRemoveItem = function(item){
       ListaAtividades.remove(item);
+      ListaAtividades.save();
     };
 
     $scope.onClickRemove = function(){

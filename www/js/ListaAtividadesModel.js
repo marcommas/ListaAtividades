@@ -1,9 +1,16 @@
 function getListaAtividades(){
-  this.items = [
-    {nome:"Item 1", finalizada: false},
-    {nome:"Item 2", finalizada: false},
-    {nome:"Item 3", finalizada: false}
-  ];
+  this.items = [];
+
+  var lista = localStorage.getItem("ListaAtividades");
+
+  if (lista !== null) {
+    this.items = angular.fromJson(lista);
+  }
+
+  this.save = function(){
+    var lista = angular.toJson(this.items);
+    localStorage.setItem("ListaAtividades", lista);
+  }
 
   this.adicionar = function(item){
     this.items.push(item);
